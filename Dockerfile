@@ -32,6 +32,10 @@ RUN ./configure && \
 RUN python3 -m pip install --upgrade pip
 RUN python3 -m pip install apache-airflow==2.4.3
 
+COPY ./requirements.txt .
+
+RUN python3 -m pip install -r ./requirements.txt
+
 RUN airflow db init
 
 COPY ./entrypoint.sh /app
