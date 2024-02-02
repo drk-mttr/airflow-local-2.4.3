@@ -33,11 +33,11 @@ RUN ./configure && \
     make install
 
 RUN python3 -m pip install --upgrade pip
-RUN python3 -m pip install apache-airflow==${AIRFLOW_VERSION}
+RUN python3 -m pip install apache-airflow==${AIRFLOW_VERSION} -c https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-3.10.txt
 
 COPY ./requirements.txt .
 
-RUN python3 -m pip install -r ./requirements.txt -c https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${PYTHON_VERSION}.txt
+RUN python3 -m pip install -r ./requirements.txt -c https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-3.10.txt
 
 RUN airflow db init
 
